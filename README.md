@@ -1,30 +1,84 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# NextJS, TypeScript and ESLint
 
-## Getting Started
+For this project, I will be playing around with multiple tools,
+such as NextJS, TypeScript and ESLint.
 
-First, run the development server:
+## NextJS
 
-```bash
-npm run dev
-# or
-yarn dev
+## TypeScript
+
+## ESLint 
+
+```
+$ yarn add -D eslint typescript @typescript-eslint/parser @typescript-eslint/eslint-plugin
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+`.eslintignore`
+```
+node_modules
+dist
+coverage
+```
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+`.eslintrc`
+```
+{
+    "root": true,
+    "parser": "@typescript-eslint/parser",
+    "plugins": [
+        "@typescript-eslint"
+    ],
+    "extends": [
+        "eslint:recommended",
+        "plugin:@typescript-eslint/recommended"
+    ]
+}
+```
 
-## Learn More
 
-To learn more about Next.js, take a look at the following resources:
+Adding an extra (but slow) level of Type Aware linting:
+`.eslintrc`
+```
+{
+    "root": true,
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "tsconfigRootDir": "__dirname",
+        "project": ["./tsconfig.json"],  
+    },
+    "plugins": [
+        "@typescript-eslint"
+    ],
+    "extends": [
+        "eslint:recommended",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:@typescript-eslint/recommended-requiring-type-checking",
+    ]
+}
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Webstorm
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Settings > Languages and Frameworks > JavaScript > Code Quality > ESLint > Set automatic
 
-## Deploy on Vercel
+## Prettier
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/import?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```
+yarn add -D prettier eslint-config-prettier
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+```
+  module.exports = {
+    root: true,
+    parser: '@typescript-eslint/parser',
+    plugins: [
+      '@typescript-eslint',
+    ],
+    extends: [
+      'eslint:recommended',
+      'plugin:@typescript-eslint/recommended',
++     'prettier',
++     'prettier/@typescript-eslint',
+    ],
+  };
+```
